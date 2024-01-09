@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-01-07T00:53:42.426938+00:00",
+  "timestamp": "2024-01-09T00:50:01.385645+00:00",
   "repo": "oauth-wg/oauth-v2-1",
   "labels": [
     {
@@ -3102,7 +3102,7 @@
       ],
       "body": "499a8f88b70ca00bfa5ef588023c68c1d0277bff removed Appendix B but unlinked references to it are still within the document next to almost every `x-www-form-urlencoded` mention.\r\n\r\n---\r\n\r\nThroughout the years this Appendix was THE resource used over and over to explain why and how the OAuth use of the Basic authorization scheme encodes the username and password tokens.\r\n\r\nIf this Appendix is removed I would propose to add examples of client secret basic with username and password tokens where the client_id and client_secret encoding changes the octets that go into the basic authorization scheme base64 encoding. This is an often overlooked implementation detail that both client and server implementers get wrong and end up inoperable, further driving users to use client secret post which this document marks as NOT RECOMMENDED.",
       "createdAt": "2022-07-25T09:07:39Z",
-      "updatedAt": "2024-01-06T12:28:46Z",
+      "updatedAt": "2024-01-07T01:24:05Z",
       "closedAt": null,
       "comments": [
         {
@@ -3160,6 +3160,13 @@
           "body": "This continues to be a problematic point in the implementations. Both client and server implementations sometimes just rely on [Basic Authentication Scheme](https://datatracker.ietf.org/doc/html/rfc2617#section-2) plugins completely, or partially disregarding the requirement to encode the username/password tokens using application/x-www-form-urlencoded. This makes interop for client implementations particularly difficult.\r\n\r\nI've encountered clients that\r\n\r\n- don't do any encoding\r\n- encode every non-alphanumeric character except `- _ . ! ~ * ' ( )` and incorrectly uses `%20` instead of `+` for the U+0020 (SPACE) character\r\n- encode every non-alphanumeric character except `- _ . ! ~ * ' ( )`\r\n- do everything correctly\r\n\r\nI've encountered servers that\r\n\r\n- do not use any non-alphanumeric characters in their client_id and client_secret (deliberately limiting the syntax of these) as to avoid this mess altogether\r\n- use non-alphanumeric characters and gracefully handle the client mistakes mentioned above with the exception of no encoding used\r\n- use non-alphanumeric characters but fail to authenticate clients that encode properly as per the definition in OAuth\r\n\r\nThe biggest offender here is Google who uses `-` and `.` in their client_id values but fails to authenticate clients that properly encode those characters. Because of this, it's been the case for years that the most interoperable client implementation was to encode every non-alphanumeric character except `- _ . ! ~ * ' ( )`, which doesn't follow the definition.\r\n\r\ncc @jogu This issue is even present in the Google Federated Identity listing on https://openid.net/certification where the test suite back then did not properly encode. I hope that if the suite ran against google's implementation today the certification would fail.\r\n\r\nWhat a mess.\r\n\r\n- I think we should be giving more examples in the document. The current example of client_secret_basic avoids non-alphanumeric characters.\r\n- I think we should discuss restricting the client_id and client_secret syntax to alphanumerics only to avoid this mess completely.\r\n\r\nI'd like this issue to be discussed in future OAuth WG meetings.",
           "createdAt": "2024-01-06T10:36:51Z",
           "updatedAt": "2024-01-06T11:07:17Z"
+        },
+        {
+          "author": "jogu",
+          "authorAssociation": "NONE",
+          "body": "> I think we should discuss restricting the client_id and client_secret syntax to alphanumerics only to avoid this mess completely.\r\n\r\nI'd be very much in favour of something along these lines. The experience of the OIDF certification team very much matches Filip's experience - any time values end up with characters in them that require encoding the number of interoperability problems sky rockets, and often in ways that are complex and time consuming to resolve (as these kind of encodings are often happening automatically in libraries and not always in obvious ways). It really doesn't seem like a good use of any developer's time to try and make these things work correctly when there's really no great advantage to using the characters that do require encoding.\r\n\r\n(This is perhaps also a more general problem, e.g. similar interoperability issues arise if a client actually tries to use a state value that uses the current full set of allowed characters in state as per https://www.rfc-editor.org/rfc/rfc6749#appendix-A.5 )\r\n",
+          "createdAt": "2024-01-07T01:24:04Z",
+          "updatedAt": "2024-01-07T01:24:04Z"
         }
       ]
     },
