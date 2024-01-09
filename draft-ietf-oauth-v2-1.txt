@@ -947,9 +947,11 @@ Table of Contents
 
 2.3.2.  Multiple Redirect URIs
 
-   If multiple redirect URIs have been registered, the client MUST
-   include a redirect URI with the authorization request using the
-   redirect_uri request parameter.
+   If multiple redirect URIs have been registered to a client, the
+   client MUST include a redirect URI with the authorization request
+   using the redirect_uri request parameter (Section 4.1.1).  If only a
+   single redirect URI has been registered to a client, the redirect_uri
+   request parameter is optional.
 
 2.3.3.  Preventing CSRF Attacks
 
@@ -1566,7 +1568,9 @@ Table of Contents
       in the request.  Code verifier transformation method is S256 or
       plain.
 
-   "redirect_uri":  OPTIONAL.  As described in Section 2.3.
+   "redirect_uri":  OPTIONAL if only one redirect URI is registered for
+      this client.  REQUIRED if multiple redirict URIs are registered
+      for this client.  See Section 2.3.2.
 
    "scope":  OPTIONAL.  The scope of the access request as described by
       Section 1.4.1.
@@ -4180,6 +4184,9 @@ Appendix E.  Document History
       urlencoded
 
    *  Clarified that clients must not parse access tokens
+
+   *  Expanded text around when redirect_uri parameter is required in
+      the authorization request
 
    -09
 
