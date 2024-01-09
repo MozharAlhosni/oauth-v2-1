@@ -1855,7 +1855,7 @@ mechanism for defining additional types.<a href="#section-1.3-1" class="pilcrow"
 Instead of the client
 requesting authorization directly from the resource owner, the client
 directs the resource owner to an authorization server (via its
-user agent, which in turn directs the
+user agent) which in turn directs the
 resource owner back to the client with the authorization code.
 The client can then exchange the authorization code for an access token.<a href="#section-1.3.1-1" class="pilcrow">¶</a></p>
 <p id="section-1.3.1-2">Before directing the resource owner back to the client with the
@@ -1993,43 +1993,46 @@ arranged with the authorization server.<a href="#section-1.3.3-1" class="pilcrow
         </h3>
 <p id="section-1.4-1">Access tokens are credentials used to access protected resources.  An
 access token is a string representing an authorization issued to the
-client.  The string is considered opaque to the client, even if it has
-a structure. Depending on the authorization server, the access token
-string may be parseable by the resource server, such as when using the
-JSON Web Token Profile for Access Tokens (<span>[<a href="#RFC9068" class="cite xref">RFC9068</a>]</span>).<a href="#section-1.4-1" class="pilcrow">¶</a></p>
-<p id="section-1.4-2">Access tokens represent specific scopes and durations of access, granted by the
-resource owner, and enforced by the resource server and authorization server.<a href="#section-1.4-2" class="pilcrow">¶</a></p>
-<p id="section-1.4-3">The token may be used by the RS to retrieve the authorization information,
+client.<a href="#section-1.4-1" class="pilcrow">¶</a></p>
+<p id="section-1.4-2">The string is considered opaque to the client, even if it has
+a structure. The client MUST NOT expect to be able to parse the access
+token value. The authorization server is not required to use a
+consistent access token encoding or format other than what is
+expected by the resource server.<a href="#section-1.4-2" class="pilcrow">¶</a></p>
+<p id="section-1.4-3">Access tokens represent specific scopes and durations of access, granted by the
+resource owner, and enforced by the resource server and authorization server.<a href="#section-1.4-3" class="pilcrow">¶</a></p>
+<p id="section-1.4-4">Depending on the authorization server implementation,
+the token string may be used by the resource server to retrieve the authorization information,
 or the token may self-contain the authorization information in a verifiable
 manner (i.e., a token string consisting of a signed data payload). One example
 of a token retrieval mechanism is Token Introspection <span>[<a href="#RFC7662" class="cite xref">RFC7662</a>]</span>, in which the
 RS calls an endpoint on the AS to validate the token presented by the client.
-One example of a structured token format is <span>[<a href="#RFC9068" class="cite xref">RFC9068</a>]</span>,
-a method of encoding access token data as a JSON Web Token <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span>.<a href="#section-1.4-3" class="pilcrow">¶</a></p>
-<p id="section-1.4-4">Additional authentication credentials, which are beyond
+One example of a structured token format is JWT Profile for Access Tokens <span>[<a href="#RFC9068" class="cite xref">RFC9068</a>]</span>,
+a method of encoding and signing access token data as a JSON Web Token <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span>.<a href="#section-1.4-4" class="pilcrow">¶</a></p>
+<p id="section-1.4-5">Additional authentication credentials, which are beyond
 the scope of this specification, may be required in order for the
 client to use an access token. This is typically referred to as a sender-constrained
 access token, such as DPoP <span>[<a href="#RFC9449" class="cite xref">RFC9449</a>]</span> and
-Mutual TLS Certificate-Bound Access Tokens <span>[<a href="#RFC8705" class="cite xref">RFC8705</a>]</span>.<a href="#section-1.4-4" class="pilcrow">¶</a></p>
-<p id="section-1.4-5">The access token provides an abstraction layer, replacing different
+Mutual TLS Certificate-Bound Access Tokens <span>[<a href="#RFC8705" class="cite xref">RFC8705</a>]</span>.<a href="#section-1.4-5" class="pilcrow">¶</a></p>
+<p id="section-1.4-6">The access token provides an abstraction layer, replacing different
 authorization constructs (e.g., username and password) with a single
 token understood by the resource server.  This abstraction enables
 issuing access tokens more restrictive than the authorization grant
 used to obtain them, as well as removing the resource server's need
-to understand a wide range of authentication methods.<a href="#section-1.4-5" class="pilcrow">¶</a></p>
-<p id="section-1.4-6">Access tokens can have different formats, structures, and methods of
+to understand a wide range of authentication methods.<a href="#section-1.4-6" class="pilcrow">¶</a></p>
+<p id="section-1.4-7">Access tokens can have different formats, structures, and methods of
 utilization (e.g., cryptographic properties) based on the resource
 server security requirements.  Access token attributes and the
 methods used to access protected resources may be extended beyond
-what is described in this specification.<a href="#section-1.4-6" class="pilcrow">¶</a></p>
-<p id="section-1.4-7">Access tokens (as well as any confidential access token
+what is described in this specification.<a href="#section-1.4-7" class="pilcrow">¶</a></p>
+<p id="section-1.4-8">Access tokens (as well as any confidential access token
 attributes) MUST be kept confidential in transit and storage, and
 only shared among the authorization server, the resource servers the
 access token is valid for, and the client to which the access token is
-issued.<a href="#section-1.4-7" class="pilcrow">¶</a></p>
-<p id="section-1.4-8">The authorization server MUST ensure that access tokens cannot be
+issued.<a href="#section-1.4-8" class="pilcrow">¶</a></p>
+<p id="section-1.4-9">The authorization server MUST ensure that access tokens cannot be
 generated, modified, or guessed to produce valid access tokens by
-unauthorized parties.<a href="#section-1.4-8" class="pilcrow">¶</a></p>
+unauthorized parties.<a href="#section-1.4-9" class="pilcrow">¶</a></p>
 <div id="access-token-scope">
 <section id="section-1.4.1">
           <h4 id="name-access-token-scope">
@@ -6130,6 +6133,9 @@ into the octet sequence below (using hexadecimal notation):<a href="#appendix-B-
 </li>
         <li class="normal" id="appendix-E-3.7">
           <p id="appendix-E-3.7.1">Restored content from old appendix B about application/x-www-form-urlencoded<a href="#appendix-E-3.7.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-E-3.8">
+          <p id="appendix-E-3.8.1">Clarified that clients must not parse access tokens<a href="#appendix-E-3.8.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="appendix-E-4">-09<a href="#appendix-E-4" class="pilcrow">¶</a></p>
