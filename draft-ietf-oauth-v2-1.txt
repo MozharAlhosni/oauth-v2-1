@@ -4172,7 +4172,7 @@ Appendix E.  Document History
 
    [[ To be removed from the final specification ]]
 
-   -latest
+   -10
 
    *  Clarify that the client id is an opaque string
 
