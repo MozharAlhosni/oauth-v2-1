@@ -2154,9 +2154,9 @@ Table of Contents
    outlined therein in order to reflect existing deployments.  The
    syntax for Bearer credentials is as follows:
 
-   b64token    = 1*( ALPHA / DIGIT /
+   token68    = 1*( ALPHA / DIGIT /
                     "-" / "." / "_" / "~" / "+" / "/" ) *"="
-   credentials = "Bearer" 1*SP b64token
+   credentials = "Bearer" 1*SP token68
 
    Clients SHOULD make authenticated requests with a bearer token using
    the Authorization request header field with the Bearer HTTP
@@ -3561,6 +3561,10 @@ Table of Contents
               RFC 2617, DOI 10.17487/RFC2617, June 1999,
               <https://www.rfc-editor.org/info/rfc2617>.
 
+   [RFC3629]  Yergeau, F., "UTF-8, a transformation format of ISO
+              10646", STD 63, RFC 3629, DOI 10.17487/RFC3629, November
+              2003, <https://www.rfc-editor.org/info/rfc3629>.
+
    [RFC3986]  Berners-Lee, T., Fielding, R., and L. Masinter, "Uniform
               Resource Identifier (URI): Generic Syntax", STD 66,
               RFC 3986, DOI 10.17487/RFC3986, January 2005,
@@ -3782,6 +3786,12 @@ Table of Contents
               Possession (DPoP)", RFC 9449, DOI 10.17487/RFC9449,
               September 2023, <https://www.rfc-editor.org/info/rfc9449>.
 
+   [W3C.REC-html401-19991224]
+              Hors, A. L., Ed., Raggett, D., Ed., and I. Jacobs, Ed.,
+              "HTML 4.01 Specification", W3C REC REC-html401-19991224,
+              W3C REC-html401-19991224, 24 December 1999,
+              <https://www.w3.org/TR/1999/REC-html401-19991224/>.
+
 Appendix A.  Augmented Backus-Naur Form (ABNF) Syntax
 
    This section provides Augmented Backus-Naur Form (ABNF) syntax
@@ -3930,9 +3940,36 @@ A.18.  "code_challenge" Syntax
 
 Appendix B.  Use of application/x-www-form-urlencoded Media Type
 
-   TBD: Describe OAuth's use of application/x-www-form-urlencoded
-   encoding, both for URL parameters as well as for the client_id and
-   secret encoding.
+   At the time of publication of [RFC6749], the application/x-www-form-
+   urlencoded media type was defined in Section 17.13.4 of
+   [W3C.REC-html401-19991224] but not registered in the IANA MIME Media
+   Types registry (http://www.iana.org/assignments/media-types
+   (http://www.iana.org/assignments/media-types)).  Furthermore, that
+   definition is incomplete, as it does not consider non-US-ASCII
+   characters.
+
+   To address this shortcoming when generating contents using this media
+   type, names and values MUST be encoded using the UTF-8 character
+   encoding scheme [RFC3629] first; the resulting octet sequence then
+   needs to be further encoded using the escaping rules defined in
+   [W3C.REC-html401-19991224].
+
+   When parsing data from a content using this media type, the names and
+   values resulting from reversing the name/value encoding consequently
+   need to be treated as octet sequences, to be decoded using the UTF-8
+   character encoding scheme.
+
+   For example, the value consisting of the six Unicode code points (1)
+   U+0020 (SPACE), (2) U+0025 (PERCENT SIGN), (3) U+0026 (AMPERSAND),
+   (4) U+002B (PLUS SIGN), (5) U+00A3 (POUND SIGN), and (6) U+20AC (EURO
+   SIGN) would be encoded into the octet sequence below (using
+   hexadecimal notation):
+
+   20 25 26 2B C2 A3 E2 82 AC
+
+   and then represented in the content as:
+
+   +%25%26%2B%C2%A3%E2%82%AC
 
    GitHub discussion: https://github.com/oauth-wg/oauth-v2-1/issues/128
    (https://github.com/oauth-wg/oauth-v2-1/issues/128)
@@ -4055,6 +4092,11 @@ Appendix E.  Document History
    *  Moved and expanded "scope" definition to introduction section
 
    *  Split access token section into structure and request
+
+   *  Renamed b64token to token68 for consistency with RFC7235
+
+   *  Restored content from old appendix B about application/x-www-form-
+      urlencoded
 
    -09
 

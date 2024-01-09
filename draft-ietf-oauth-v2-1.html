@@ -3860,9 +3860,9 @@ practice outlined therein in order to reflect existing deployments.
 The syntax for Bearer credentials is as follows:<a href="#section-5.1.1-4" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-5.1.1-5">
 <pre>
-b64token    = 1*( ALPHA / DIGIT /
+token68    = 1*( ALPHA / DIGIT /
                  "-" / "." / "_" / "~" / "+" / "/" ) *"="
-credentials = "Bearer" 1*SP b64token
+credentials = "Bearer" 1*SP token68
 </pre><a href="#section-5.1.1-5" class="pilcrow">¶</a>
 </div>
 <p id="section-5.1.1-6">Clients SHOULD make authenticated requests with a bearer token using
@@ -5472,6 +5472,10 @@ work is based upon. No changes to those registries are required by this specific
         <dd>
 <span class="refAuthor">Franks, J.</span>, <span class="refAuthor">Hallam-Baker, P.</span>, <span class="refAuthor">Hostetler, J.</span>, <span class="refAuthor">Lawrence, S.</span>, <span class="refAuthor">Leach, P.</span>, <span class="refAuthor">Luotonen, A.</span>, and <span class="refAuthor">L. Stewart</span>, <span class="refTitle">"HTTP Authentication: Basic and Digest Access Authentication"</span>, <span class="seriesInfo">RFC 2617</span>, <span class="seriesInfo">DOI 10.17487/RFC2617</span>, <time datetime="1999-06" class="refDate">June 1999</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2617">https://www.rfc-editor.org/info/rfc2617</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC3629">[RFC3629]</dt>
+        <dd>
+<span class="refAuthor">Yergeau, F.</span>, <span class="refTitle">"UTF-8, a transformation format of ISO 10646"</span>, <span class="seriesInfo">STD 63</span>, <span class="seriesInfo">RFC 3629</span>, <span class="seriesInfo">DOI 10.17487/RFC3629</span>, <time datetime="2003-11" class="refDate">November 2003</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc3629">https://www.rfc-editor.org/info/rfc3629</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC3986">[RFC3986]</dt>
         <dd>
 <span class="refAuthor">Berners-Lee, T.</span>, <span class="refAuthor">Fielding, R.</span>, and <span class="refAuthor">L. Masinter</span>, <span class="refTitle">"Uniform Resource Identifier (URI): Generic Syntax"</span>, <span class="seriesInfo">STD 66</span>, <span class="seriesInfo">RFC 3986</span>, <span class="seriesInfo">DOI 10.17487/RFC3986</span>, <time datetime="2005-01" class="refDate">January 2005</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc3986">https://www.rfc-editor.org/info/rfc3986</a>&gt;</span>. </dd>
@@ -5658,8 +5662,12 @@ work is based upon. No changes to those registries are required by this specific
 <span class="refAuthor">Lodderstedt, T.</span>, <span class="refAuthor">Richer, J.</span>, and <span class="refAuthor">B. Campbell</span>, <span class="refTitle">"OAuth 2.0 Rich Authorization Requests"</span>, <span class="seriesInfo">RFC 9396</span>, <span class="seriesInfo">DOI 10.17487/RFC9396</span>, <time datetime="2023-05" class="refDate">May 2023</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9396">https://www.rfc-editor.org/info/rfc9396</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC9449">[RFC9449]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">Fett, D.</span>, <span class="refAuthor">Campbell, B.</span>, <span class="refAuthor">Bradley, J.</span>, <span class="refAuthor">Lodderstedt, T.</span>, <span class="refAuthor">Jones, M.</span>, and <span class="refAuthor">D. Waite</span>, <span class="refTitle">"OAuth 2.0 Demonstrating Proof of Possession (DPoP)"</span>, <span class="seriesInfo">RFC 9449</span>, <span class="seriesInfo">DOI 10.17487/RFC9449</span>, <time datetime="2023-09" class="refDate">September 2023</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9449">https://www.rfc-editor.org/info/rfc9449</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="W3C.REC-html401-19991224">[W3C.REC-html401-19991224]</dt>
+      <dd>
+<span class="refAuthor">Hors, A. L., Ed.</span>, <span class="refAuthor">Raggett, D., Ed.</span>, and <span class="refAuthor">I. Jacobs, Ed.</span>, <span class="refTitle">"HTML 4.01 Specification"</span>, <span class="seriesInfo">W3C REC REC-html401-19991224</span>, <span class="seriesInfo">W3C REC-html401-19991224</span>, <time datetime="1999-12-24" class="refDate">24 December 1999</time>, <span>&lt;<a href="https://www.w3.org/TR/1999/REC-html401-19991224/">https://www.w3.org/TR/1999/REC-html401-19991224/</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
@@ -5943,8 +5951,39 @@ DIGIT = %x30-39
       <h2 id="name-use-of-application-x-www-fo">
 <a href="#appendix-B" class="section-number selfRef">Appendix B. </a><a href="#name-use-of-application-x-www-fo" class="section-name selfRef">Use of application/x-www-form-urlencoded Media Type</a>
       </h2>
-<p id="appendix-B-1">TBD: Describe OAuth's use of <code>application/x-www-form-urlencoded</code> encoding, both for URL parameters as well as for the client_id and secret encoding.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
-<p id="appendix-B-2">GitHub discussion: <a href="https://github.com/oauth-wg/oauth-v2-1/issues/128">https://github.com/oauth-wg/oauth-v2-1/issues/128</a><a href="#appendix-B-2" class="pilcrow">¶</a></p>
+<p id="appendix-B-1">At the time of publication of <span>[<a href="#RFC6749" class="cite xref">RFC6749</a>]</span>, the
+<code>application/x-www-form-urlencoded</code> media type was defined in
+Section 17.13.4 of <span>[<a href="#W3C.REC-html401-19991224" class="cite xref">W3C.REC-html401-19991224</a>]</span> but not registered in
+the IANA MIME Media Types registry
+(<a href="http://www.iana.org/assignments/media-types">http://www.iana.org/assignments/media-types</a>).  Furthermore, that
+definition is incomplete, as it does not consider non-US-ASCII
+characters.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
+<p id="appendix-B-2">To address this shortcoming when generating contents using this media
+type, names and values MUST be encoded using the UTF-8 character
+encoding scheme <span>[<a href="#RFC3629" class="cite xref">RFC3629</a>]</span> first; the resulting octet sequence then
+needs to be further encoded using the escaping rules defined in
+<span>[<a href="#W3C.REC-html401-19991224" class="cite xref">W3C.REC-html401-19991224</a>]</span>.<a href="#appendix-B-2" class="pilcrow">¶</a></p>
+<p id="appendix-B-3">When parsing data from a content using this media type, the names and
+values resulting from reversing the name/value encoding consequently
+need to be treated as octet sequences, to be decoded using the UTF-8
+character encoding scheme.<a href="#appendix-B-3" class="pilcrow">¶</a></p>
+<p id="appendix-B-4">For example, the value consisting of the six Unicode code points
+(1) U+0020 (SPACE), (2) U+0025 (PERCENT SIGN),
+(3) U+0026 (AMPERSAND), (4) U+002B (PLUS SIGN),
+(5) U+00A3 (POUND SIGN), and (6) U+20AC (EURO SIGN) would be encoded
+into the octet sequence below (using hexadecimal notation):<a href="#appendix-B-4" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="appendix-B-5">
+<pre>
+20 25 26 2B C2 A3 E2 82 AC
+</pre><a href="#appendix-B-5" class="pilcrow">¶</a>
+</div>
+<p id="appendix-B-6">and then represented in the content as:<a href="#appendix-B-6" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="appendix-B-7">
+<pre>
++%25%26%2B%C2%A3%E2%82%AC
+</pre><a href="#appendix-B-7" class="pilcrow">¶</a>
+</div>
+<p id="appendix-B-8">GitHub discussion: <a href="https://github.com/oauth-wg/oauth-v2-1/issues/128">https://github.com/oauth-wg/oauth-v2-1/issues/128</a><a href="#appendix-B-8" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="extensions">
@@ -6085,6 +6124,12 @@ DIGIT = %x30-39
 </li>
         <li class="normal" id="appendix-E-3.5">
           <p id="appendix-E-3.5.1">Split access token section into structure and request<a href="#appendix-E-3.5.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-E-3.6">
+          <p id="appendix-E-3.6.1">Renamed b64token to token68 for consistency with RFC7235<a href="#appendix-E-3.6.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-E-3.7">
+          <p id="appendix-E-3.7.1">Restored content from old appendix B about application/x-www-form-urlencoded<a href="#appendix-E-3.7.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="appendix-E-4">-09<a href="#appendix-E-4" class="pilcrow">¶</a></p>
