@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-01-09T00:50:01.385645+00:00",
+  "timestamp": "2024-01-11T00:50:11.958186+00:00",
   "repo": "oauth-wg/oauth-v2-1",
   "labels": [
     {
@@ -1689,7 +1689,7 @@
       "id": "MDU6SXNzdWU4MzIzNTQzMTU=",
       "title": "Clarify limits and caveats on access token formats",
       "url": "https://github.com/oauth-wg/oauth-v2-1/issues/59",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "aaronpk",
       "authorAssociation": "MEMBER",
       "assignees": [
@@ -1701,8 +1701,8 @@
       ],
       "body": "Section 5.1\r\n\r\nFrom Vittorio\r\n\r\n> On the access_token parameter. Given the discussions we had for the JWT AT profile draft, I am wondering whether it should be called out here that the AT recipient is the RS, that the client should not expect to be able to parse the access_token, and that the AS is under no obligation to use a consistent AT encoding outside of what is negotiated with the RS. I don\u2019t feel very strongly about this, or about where in the spec this should be called out, but it sure would have made life easier in those discussions- hence the comment.",
       "createdAt": "2021-03-16T02:37:36Z",
-      "updatedAt": "2023-07-27T15:30:49Z",
-      "closedAt": null,
+      "updatedAt": "2024-01-09T22:48:46Z",
+      "closedAt": "2024-01-09T22:48:46Z",
       "comments": [
         {
           "author": "aaronpk",
@@ -2233,7 +2233,7 @@
       "id": "MDU6SXNzdWU5MTk2MjM0ODM=",
       "title": "Clarify what should happen to authorization codes on an error response",
       "url": "https://github.com/oauth-wg/oauth-v2-1/issues/82",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "aaronpk",
       "authorAssociation": "MEMBER",
       "assignees": [
@@ -2242,8 +2242,8 @@
       "labels": [],
       "body": "If there was a problem with the token request that otherwise contained a valid authorization code, clarify whether the authorization code should remain valid or should be treated as if it had been used successfully.",
       "createdAt": "2021-06-12T17:44:09Z",
-      "updatedAt": "2023-08-20T13:23:38Z",
-      "closedAt": null,
+      "updatedAt": "2024-01-09T23:39:22Z",
+      "closedAt": "2024-01-09T23:39:22Z",
       "comments": [
         {
           "author": "Zegnat",
@@ -2279,6 +2279,13 @@
           "body": "concur with the side meeting decisions FWIW ",
           "createdAt": "2022-07-27T15:20:18Z",
           "updatedAt": "2022-07-27T15:20:18Z"
+        },
+        {
+          "author": "aaronpk",
+          "authorAssociation": "MEMBER",
+          "body": "I went with describing the intended outcome instead of all the details:\r\n\r\n> The authorization server MUST return an access token only once for a given authorization code.\r\n\r\nThis allows DPoP to have the client send the authorization code multiple times, since it doesn't place a restriction on clients \"using\" authorization codes.",
+          "createdAt": "2024-01-09T23:39:22Z",
+          "updatedAt": "2024-01-09T23:39:22Z"
         }
       ]
     },
@@ -2545,15 +2552,15 @@
       "id": "I_kwDODkfq5s47yc2R",
       "title": "Consider dropping complex authorization code replay mitigations in favor of PKCE",
       "url": "https://github.com/oauth-wg/oauth-v2-1/issues/92",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "aaronpk",
       "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "There are a number of authorization code replay mitigations in 6749 that are not strictly necessary thanks to PKCE. Additionally, some of the mitigation techniques are quite burdensome to implement.\r\n\r\n* #65\r\n* #82\r\n* #54\r\n\r\nIt should still be possible to allow ASs to limit authorization codes to one time use if they want to put that limitation in place and it's feasible for them.\r\n\r\nThis may have some implications around one-time-use requests to resource servers such as payment initiation.\r\n",
       "createdAt": "2021-09-21T18:56:56Z",
-      "updatedAt": "2023-08-20T13:23:39Z",
-      "closedAt": null,
+      "updatedAt": "2024-01-09T23:39:38Z",
+      "closedAt": "2024-01-09T23:39:37Z",
       "comments": [
         {
           "author": "aaronpk",
@@ -2561,6 +2568,13 @@
           "body": "During the interim we agreed to move forward with these changes, as well as better document all the breaking changes compared to OAuth 2.0, captured here #97",
           "createdAt": "2021-10-13T17:09:52Z",
           "updatedAt": "2021-10-13T17:09:52Z"
+        },
+        {
+          "author": "aaronpk",
+          "authorAssociation": "MEMBER",
+          "body": "All related issues have been addressed.",
+          "createdAt": "2024-01-09T23:39:37Z",
+          "updatedAt": "2024-01-09T23:39:37Z"
         }
       ]
     },
@@ -3369,7 +3383,7 @@
         },
         {
           "author": "kmzs",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "- [ ] Mix-up attack mitigations: #150 ",
           "createdAt": "2023-07-11T12:07:51Z",
           "updatedAt": "2023-07-11T12:07:51Z"
@@ -3554,15 +3568,17 @@
       "id": "I_kwDODkfq5s5oexzQ",
       "title": "Update DPoP references to RFC 9449",
       "url": "https://github.com/oauth-wg/oauth-v2-1/issues/149",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "aaronpk",
       "authorAssociation": "MEMBER",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "editorial"
+      ],
       "body": "",
       "createdAt": "2023-06-12T14:29:18Z",
-      "updatedAt": "2023-09-08T14:56:58Z",
-      "closedAt": null,
+      "updatedAt": "2024-01-09T23:08:19Z",
+      "closedAt": "2024-01-09T21:30:49Z",
       "comments": [
         {
           "author": "aaronpk",
@@ -3621,7 +3637,7 @@
       "labels": [],
       "body": "https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-09#name-clickjacking\r\n\r\n![image](https://github.com/oauth-wg/oauth-v2-1/assets/16363180/415bbb29-b5e8-4748-a46f-150c5349a272)\r\n",
       "createdAt": "2023-07-21T03:03:07Z",
-      "updatedAt": "2023-07-21T17:01:05Z",
+      "updatedAt": "2024-01-09T23:08:06Z",
       "closedAt": "2023-07-21T17:01:05Z",
       "comments": []
     },
@@ -3650,10 +3666,12 @@
       "author": "vanbukin",
       "authorAssociation": "NONE",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "wontfix"
+      ],
       "body": "[According to the OpenID Connect Core 1.0 incorporating errata set 1 specification](https://openid.net/specs/openid-connect-core-1_0.html#rfc.section.3), for the Hybrid Flow, the `response_type` parameter should be set to `\"code id_token\"`. However, based on the [OpenID Connect Dynamic Client Registration 1.0 incorporating errata set 1](https://openid.net/specs/openid-connect-registration-1_0.html#rfc.section.2) specification, if a client is registered with this response_type, its grant_types should be `\"authorization_code\"` and `\"implicit\"`. \r\nPlease note that the Implicit Flow has been removed in OAuth 2.1. \r\nI am trying to create a provider that simultaneously supports OAuth 2.1 and OpenID Connect 1.0 but without OAuth 2.0 support, specifically excluding the Implicit Flow and ROCF. \r\nI see a contradiction between these specifications, and I'm not sure where to turn for guidance. \r\nHow can I proceed to support hybrid flow without using the implicit grant type?",
       "createdAt": "2023-07-22T19:34:23Z",
-      "updatedAt": "2023-07-27T15:14:34Z",
+      "updatedAt": "2024-01-09T23:07:50Z",
       "closedAt": "2023-07-27T15:14:34Z",
       "comments": [
         {
@@ -3674,10 +3692,12 @@
       "author": "d1nch8g",
       "authorAssociation": "NONE",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "invalid"
+      ],
       "body": "Hello!\r\n\r\nI think that most part of current authorization methods have a problem - they require user to register an account with specific password at least in one service. This service can further be used as an authentication server for other services. That is nice, that users do not have to share their password between different services (as of what i understand, the problem which is solved with OAuth), but having an account in specific service should not be a requirement.\r\n\r\nCryptography and GPG allows users to send their identity to public server, and then verify their packages/messages/data with digital signatures. This approach can be extended/reused as authorization/authontication mechanism, which will allow user to verify their identity with GPG, instead of creating an account in specific service. This will also reduce the headache of connecting lots of different authorization services, since there would be a unified auth approach, which is not tied to specific authorization server.\r\n\r\nCurrently OAuth spec has [http signatures](https://oauth.net/http-signatures/) draft, which allows to sign/verify message with ssh-keys. This should also be possible to GPG for authorization and message verification.",
       "createdAt": "2023-07-24T13:44:24Z",
-      "updatedAt": "2023-07-24T13:47:23Z",
+      "updatedAt": "2024-01-09T23:07:37Z",
       "closedAt": "2023-07-24T13:47:23Z",
       "comments": [
         {
@@ -3774,7 +3794,7 @@
     {
       "number": 163,
       "id": "I_kwDODkfq5s5uXS_5",
-      "title": "The authorization server SHOULD NOT ",
+      "title": "Scope in relation to OIDC",
       "url": "https://github.com/oauth-wg/oauth-v2-1/issues/163",
       "state": "OPEN",
       "author": "arukiidou",
@@ -3783,7 +3803,7 @@
       "labels": [],
       "body": "- relates #151\r\n\r\n## Summary of proposal\r\n\r\nAdd the following description to https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-09#access-token-scope\r\n\r\nThe authorization server SHOULD NOT define different content with the same scope name as an OIDC defined claim, even if it does not implement the OIDC specification.\r\n\r\n## Why?\r\n\r\n- Interoperability with OIDC specifications as much as possible\r\n- If client could implicitly expect the request content from the scope name, do not mislead\r\n\r\n## Example\r\n\r\n### \u2705Its OK.\r\n\r\n| scope           | description             |\r\n|------------------------|-----------------------------------------------|\r\n|    openid     |  REQUIRED. for all OpenID Connect OAuth2 requests.   | \r\n|    profile     |  OPTIONAL. This scope value requests access to the End-User's default profile Claims, which are: name, family_name, given_name, middle_name, nickname, preferred_username, profile, picture, website, gender, birthdate, zoneinfo, locale, and updated_at.   | \r\n| email          |  OPTIONAL. This scope value requests access to the email and email_verified Claims.  | \r\n| address         |  OPTIONAL. This scope value requests access to the address Claim.   | \r\n| phone         |  OPTIONAL. This scope value requests access to the phone_number and phone_number_verified Claims.   | \r\n\r\n### \u2705not OIDC, but Its also OK( as OAuth2.1).\r\n\r\nNot having a scope defined in the OIDC specification is permitted.\r\n\r\n| scope           | description             |\r\n|------------------------|-----------------------------------------------|\r\n| profile         |  OPTIONAL. This scope value requests access to the End-User's default profile Claims, which are: name, family_name, given_name, middle_name, nickname, preferred_username, profile, picture, website, gender, birthdate, zoneinfo, locale, and updated_at.   | \r\n| address         |  OPTIONAL. This scope value requests access to the address Claim.   | \r\n\r\n### \u2705not OIDC, but Its also OK( as OAuth2.1).\r\n\r\n| scope           | description             |\r\n|------------------------|-----------------------------------------------|\r\n| profile         |  OPTIONAL. This scope value requests access to the End-User's default profile Claims, which are: name, family_name, given_name, middle_name, nickname, preferred_username, profile, picture, website, gender, birthdate, zoneinfo, locale, and updated_at.   | \r\n| read_registry         |  OPTIONAL. This scope value requests access to the package registry. | \r\n\r\n### \u274c SHOULD NOT - Do not attempt to request access to an email claim by informing the client of the address scope\r\n\r\n| scope           | description             |\r\n|------------------------|-----------------------------------------------|\r\n| profile         |  OPTIONAL. This scope value requests access to the End-User's default profile Claims, which are: name, family_name, given_name, middle_name, nickname, preferred_username, profile, picture, website, gender, birthdate, zoneinfo, locale, and updated_at.   | \r\n| address |   OPTIONAL. This scope value requests access to the email-address Claim.   | \r\n\r\n### References: OpenID Connect Core 1.0 Spec \r\n\r\nhttps://openid.net/specs/openid-connect-core-1_0.html#ScopeClaims\r\n",
       "createdAt": "2023-08-15T15:04:03Z",
-      "updatedAt": "2023-08-15T15:04:55Z",
+      "updatedAt": "2024-01-09T23:09:14Z",
       "closedAt": null,
       "comments": []
     },
@@ -3792,32 +3812,50 @@
       "id": "I_kwDODkfq5s5vJOhS",
       "title": "Use of 'permissions' term in refresh token section",
       "url": "https://github.com/oauth-wg/oauth-v2-1/issues/164",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "jogu",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "https://www.ietf.org/archive/id/draft-ietf-oauth-v2-1-09.html#section-1.3.2 says:\r\n\r\n> access tokens may have a shorter lifetime and fewer permissions than authorized by the resource owner\r\n\r\nI've recently had some in depth conversations about what \"permissions\" here means. This is the only use of 'permissions' [in this way] in the whole document, and I don't think there's some special thing that's different in the refresh token grant that means we should be using a different word. I think it might be a small improvement to use the same terms as used elsewhere in the document - other words that are already used are \"access range\", \"scopes\", \"scope-token\" and \"privileges\".\r\n\r\nChanging \"permissions\" to \"privileges\" seems like it would probably be the most consistent with the rest of the spec.",
       "createdAt": "2023-08-24T08:43:05Z",
-      "updatedAt": "2023-08-24T08:43:05Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2024-01-09T23:10:46Z",
+      "closedAt": "2024-01-09T23:10:29Z",
+      "comments": [
+        {
+          "author": "aaronpk",
+          "authorAssociation": "MEMBER",
+          "body": "Agreed, I think that's an easy fix. \"privileges\" is used in a lot of other places already.",
+          "createdAt": "2024-01-09T23:10:44Z",
+          "updatedAt": "2024-01-09T23:10:44Z"
+        }
+      ]
     },
     {
       "number": 165,
       "id": "I_kwDODkfq5s5w-RJE",
       "title": "native clients",
       "url": "https://github.com/oauth-wg/oauth-v2-1/issues/165",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "adeinega",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "editorial"
+      ],
       "body": "[Section \"2.3.1.  Registration Requirements\"](https://drafts.oauth.net/oauth-v2-1/draft-ietf-oauth-v2-1.html#section-2.3.1) says that\r\n\r\n> Authorization servers MUST reject authorization requests that specify a redirect URI that doesn't exactly match one that was registered, with an exception for loopback redirects, where an exact match is required except for the port URI component, see Section 4.1.1 for details.\r\n\r\nHowever, https://drafts.oauth.net/oauth-v2-1/draft-ietf-oauth-v2-1.html#section-4.1.1 redirects me back\r\n> \"redirect_uri\": OPTIONAL. As described in [Section 2.3](https://drafts.oauth.net/oauth-v2-1/draft-ietf-oauth-v2-1.html#redirection-endpoint).\r\n\r\nand doesn't mention any nuances with redirect URIs for native clients.\r\n\r\n> When comparing the two URIs the authorization server MUST ensure that the two URIs are equal, see RFC3986, Section 6.2.1, Simple String Comparison, for details.\r\n\r\nIt might be worth clarifying these details. Hence, this issue.",
       "createdAt": "2023-09-13T22:58:20Z",
-      "updatedAt": "2023-09-13T22:58:20Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2024-01-09T23:08:27Z",
+      "closedAt": "2024-01-09T23:06:24Z",
+      "comments": [
+        {
+          "author": "aaronpk",
+          "authorAssociation": "MEMBER",
+          "body": "I'm not sure what this has to do with native clients, but I agree it was not very clear. I made it much more explicit in both sections 4.1.1 and 2.3 about when this is required or optional, hope that helps!",
+          "createdAt": "2024-01-09T23:07:00Z",
+          "updatedAt": "2024-01-09T23:07:00Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -6631,24 +6669,26 @@
       "id": "PR_kwDODkfq5s5VMd0z",
       "title": "Incorporated mix-up attack mitigations from security BCP",
       "url": "https://github.com/oauth-wg/oauth-v2-1/pull/150",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "kmzs",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Most of the text is copied from the security BCP and only slightly adjusted.\r\n\r\nI am not sure if 2.1 needs to contain the detailed description of mix-up attacks and variants (56b6b6cdcfccf30baa124d37597d18a7cecf032e) or if it would be sufficient to add mix-up mitigations (2d07d10b9787d3798fab0913ff67ea1cd2e29d89).",
       "createdAt": "2023-07-11T12:06:54Z",
-      "updatedAt": "2023-09-19T11:48:57Z",
+      "updatedAt": "2024-01-09T22:57:04Z",
       "baseRepository": "oauth-wg/oauth-v2-1",
       "baseRefName": "main",
       "baseRefOid": "11935e9041737963a58e6ecb5eb03cde1c9bd85c",
       "headRepository": "Hackmanit/oauth-v2-1",
       "headRefName": "main",
       "headRefOid": "4dab73024e594a13d6fc9fff50ccf0fef58a04c8",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-01-09T22:52:12Z",
+      "mergedAt": "2024-01-09T22:52:12Z",
+      "mergedBy": "aaronpk",
+      "mergeCommit": {
+        "oid": "fd1d58e96b797c17254d915fa92729ae13868daa"
+      },
       "comments": [
         {
           "author": "aaronpk",
@@ -6659,13 +6699,34 @@
         },
         {
           "author": "kmzs",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "Finally had the time for this quick revert of my latest commit.\r\n\r\nDo you think the description of mix-up is fine now? Should we add a reference to the detailed description of mix-up attacks in the security BCP?",
           "createdAt": "2023-09-19T11:48:56Z",
           "updatedAt": "2023-09-19T11:48:56Z"
+        },
+        {
+          "author": "aaronpk",
+          "authorAssociation": "MEMBER",
+          "body": "Thanks, I added a reference to the security BCP in that section",
+          "createdAt": "2024-01-09T22:57:03Z",
+          "updatedAt": "2024-01-09T22:57:03Z"
         }
       ],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDODkfq5s5sAzZb",
+          "commit": {
+            "abbreviatedOid": "4dab730"
+          },
+          "author": "aaronpk",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-01-09T22:52:08Z",
+          "updatedAt": "2024-01-09T22:52:08Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 154,
