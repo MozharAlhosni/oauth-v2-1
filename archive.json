@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-01-21T00:54:10.909634+00:00",
+  "timestamp": "2024-01-23T00:51:20.026264+00:00",
   "repo": "oauth-wg/oauth-v2-1",
   "labels": [
     {
@@ -3856,6 +3856,46 @@
           "updatedAt": "2024-01-09T23:07:00Z"
         }
       ]
+    },
+    {
+      "number": 166,
+      "id": "I_kwDODkfq5s58wpwE",
+      "title": "case sensitivity of Bearer http authentication scheme",
+      "url": "https://github.com/oauth-wg/oauth-v2-1/issues/166",
+      "state": "OPEN",
+      "author": "jogu",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "It seems to be a common interoperability issue (and a source of some really great arguments as to who is wrong, e.g. https://github.com/fastify/fastify-bearer-auth/pull/172#issuecomment-1903321866 ) that some implementations treat the 'Bearer' http authentication scheme name as case sensitive.\r\n\r\nAs far as I can find, HTTP authentication schemes are case insensitive; in particular https://www.rfc-editor.org/rfc/rfc9110#name-authentication-scheme says:\r\n\r\n> It uses a case-insensitive token to identify the authentication scheme:\r\n\r\nRegardless of whether my conclusion is correct, I think we should add a sentence to OAuth 2.1 that makes it clear if it is case sensitive or not.\r\n",
+      "createdAt": "2024-01-22T05:43:22Z",
+      "updatedAt": "2024-01-22T06:39:56Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "jogu",
+          "authorAssociation": "NONE",
+          "body": "I think people often get confused by https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-10#section-5.1.1 in particular:\r\n\r\n> credentials = \"Bearer\" 1*SP token68\r\n\r\nso this might be a good place to add an additional sentence. (As per https://www.rfc-editor.org/rfc/rfc5234#section-2.3 I believe this is defining 'Bearer' as a case insensitive match.)",
+          "createdAt": "2024-01-22T06:39:55Z",
+          "updatedAt": "2024-01-22T06:39:55Z"
+        }
+      ]
+    },
+    {
+      "number": 167,
+      "id": "I_kwDODkfq5s58166G",
+      "title": "Character encoding for the application/x-www-form-urlencoded format",
+      "url": "https://github.com/oauth-wg/oauth-v2-1/issues/167",
+      "state": "OPEN",
+      "author": "adeinega",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Section 3.2.2 Tokens states that\r\n\r\n> The client makes a request to the token endpoint by sending the\r\n> following parameters using the application/x-www-form-urlencoded\r\n> format per Appendix B with a character encoding of UTF-8 in the HTTP\r\n> request content:\r\n\r\nHowever, the following example does not include UTF-8 as character encoding\r\n\r\n> POST /token HTTP/1.1\r\n> Host: server.example.com\r\n> Authorization: Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW\r\n> Content-Type: application/x-www-form-urlencoded\r\n\r\nit should look like as\r\n\r\n> POST /token HTTP/1.1\r\n> Host: server.example.com\r\n> Authorization: Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW\r\n> Content-Type: application/x-www-form-urlencoded; charset=UTF-8\"; \r\n\r\nthe same applies for all other similar examples in the spec.\r\n\r\nHow is this important? In some (rare) cases, it can lead to interoperability issues as app servers & frameworks that run an AS do not necessarily use \"UTF-8\" as a default encoding character, as an example, Java Servlets use \"ISO-8859-1\". So, it is better for a client to always specify the character explicitly. \r\n",
+      "createdAt": "2024-01-22T18:32:47Z",
+      "updatedAt": "2024-01-22T18:37:33Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
