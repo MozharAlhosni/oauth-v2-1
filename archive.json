@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-01-23T00:51:20.026264+00:00",
+  "timestamp": "2024-01-25T00:51:00.675452+00:00",
   "repo": "oauth-wg/oauth-v2-1",
   "labels": [
     {
@@ -3891,9 +3891,9 @@
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
-      "body": "Section 3.2.2 Tokens states that\r\n\r\n> The client makes a request to the token endpoint by sending the\r\n> following parameters using the application/x-www-form-urlencoded\r\n> format per Appendix B with a character encoding of UTF-8 in the HTTP\r\n> request content:\r\n\r\nHowever, the following example does not include UTF-8 as character encoding\r\n\r\n> POST /token HTTP/1.1\r\n> Host: server.example.com\r\n> Authorization: Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW\r\n> Content-Type: application/x-www-form-urlencoded\r\n\r\nit should look like as\r\n\r\n> POST /token HTTP/1.1\r\n> Host: server.example.com\r\n> Authorization: Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW\r\n> Content-Type: application/x-www-form-urlencoded; charset=UTF-8\"; \r\n\r\nthe same applies for all other similar examples in the spec.\r\n\r\nHow is this important? In some (rare) cases, it can lead to interoperability issues as app servers & frameworks that run an AS do not necessarily use \"UTF-8\" as a default encoding character, as an example, Java Servlets use \"ISO-8859-1\". So, it is better for a client to always specify the character explicitly. \r\n",
+      "body": "Section 3.2.2 Tokens states that\r\n\r\n> The client makes a request to the token endpoint by sending the\r\n> following parameters using the application/x-www-form-urlencoded\r\n> format per Appendix B with a character encoding of UTF-8 in the HTTP\r\n> request content:\r\n\r\nHowever, the following example does not include UTF-8 as character encoding\r\n\r\n> POST /token HTTP/1.1\r\n> Host: server.example.com\r\n> Authorization: Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW\r\n> Content-Type: application/x-www-form-urlencoded\r\n\r\nit should look like as\r\n\r\n> POST /token HTTP/1.1\r\n> Host: server.example.com\r\n> Authorization: Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW\r\n> Content-Type: application/x-www-form-urlencoded; charset=UTF-8; \r\n\r\nthe same applies for all other similar examples in the spec.\r\n\r\nHow is this important? In some (rare) cases, it can lead to interoperability issues as app servers & frameworks that run an AS do not necessarily use \"UTF-8\" as a default encoding character, as an example, Java Servlets use \"ISO-8859-1\". So, it is better for a client to always specify the character explicitly. \r\n",
       "createdAt": "2024-01-22T18:32:47Z",
-      "updatedAt": "2024-01-22T18:37:33Z",
+      "updatedAt": "2024-01-24T00:30:24Z",
       "closedAt": null,
       "comments": []
     }
