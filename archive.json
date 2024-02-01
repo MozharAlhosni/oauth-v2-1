@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-01-30T00:45:34.836219+00:00",
+  "timestamp": "2024-02-01T00:48:36.837128+00:00",
   "repo": "oauth-wg/oauth-v2-1",
   "labels": [
     {
@@ -1651,7 +1651,7 @@
       ],
       "body": "Section 5.1\r\n\r\nFrom Vittorio:\r\n\r\n> On the refresh_token parameter. The lack of details in how OAuth2 describes how/when an AS returns refresh tokens led to today\u2019s complicated situation in which many implementations issue RTs only when OIDC\u2019s offline_access is received in the scopes, as it was the only mention in public specs describing a concrete behavior. See the associated online_access discussion on the OIDC list, as RTs gain importance as session artifacts of sort for SPAs now that implicit is dead and ITP makes iframe renewals problematic.\r\n> Unfortunately it is too late to be prescriptive here, as we cannot break compatibility with whatever choices existing AS implementations made. However we can be more descriptive and give the reader a better idea of what\u2019s the range of possibilities. Some nonnormative examples of how existing AS determine whether to issue an RT or not (eg as an option determined at client registration time, or any other heuristic you guys encountered in the wild) might help people to better understand their options and the intent of the specification here.\r\n",
       "createdAt": "2021-03-16T02:35:37Z",
-      "updatedAt": "2023-07-27T15:30:17Z",
+      "updatedAt": "2024-01-31T15:11:00Z",
       "closedAt": null,
       "comments": [
         {
@@ -1803,7 +1803,7 @@
       ],
       "body": "from Vittorio:\r\n\r\nhttps://tools.ietf.org/html/draft-ietf-oauth-v2-1-00#section-6\r\n\r\n> We might need to be more precise here. Do we mean the scopes consented by the RO in the request that led to the issuance of the RT being used? Just saying consented by the RO for the client does not exclude cases in which there are more instances of the client in operation. Say that I am running uber on phone 1 and I consent to read my google calendar, getting AT1 and RT1. Say that on phone 2 I also run the uber app, and this time I consent to write my google calendar, obtaining AT2 and RT2 on this new device. Now consider the various combinations here. Should RT2 allow me to get calendar:read too, given that it was already consented by RO for this client? Should RT1 allow me to get AT1\u2019 containing calendar:write, given that RO consented for it when using a different instance of the same client? Whatever is the answer you want to the questions above, I think the spec should have language clear enough to unambiguously determine the desired behavior.\r\n",
       "createdAt": "2021-03-16T03:03:00Z",
-      "updatedAt": "2023-07-27T15:57:36Z",
+      "updatedAt": "2024-01-31T15:11:34Z",
       "closedAt": null,
       "comments": [
         {
@@ -1844,7 +1844,7 @@
       ],
       "body": "from Vittorio:\r\n\r\n> On the identical scopes requirement. Say that after obtaining RT1, which includes scopes s1 and s2 for client c1, the RO revokes authorization for c1 to use s2. Should the AS fail the RT redemption, or return an AT with only s1 and a scopes parameter informing the client of the change? As developer I would prefer the latter, to preserve the experience: but if we are adamant about the current language, I think it might be useful to explicitly call out that any changes to the grant on the AS side should result in failure of the RT redemption.\r\n",
       "createdAt": "2021-03-16T03:13:39Z",
-      "updatedAt": "2023-07-27T16:00:58Z",
+      "updatedAt": "2024-01-31T15:11:41Z",
       "closedAt": null,
       "comments": [
         {
@@ -2624,7 +2624,7 @@
       "labels": [],
       "body": "Document each change and when there is a breaking change note for which role it breaks.\r\n\r\ne.g.\r\n\r\nA 2.1 client trying to work with a 2.0 server that uses PKCE would break if the redirect_uri is not sent to the token endpoint if the client is configured with more than one redirect_uri.\r\n",
       "createdAt": "2021-10-13T16:45:42Z",
-      "updatedAt": "2023-12-06T17:36:11Z",
+      "updatedAt": "2024-01-31T15:11:48Z",
       "closedAt": null,
       "comments": []
     },
@@ -3089,7 +3089,7 @@
       "labels": [],
       "body": "There are still some references to old URI specs like RFC3986, which have since been replaced by various IETF specs as well as the WHATWG URL spec.",
       "createdAt": "2022-07-21T02:36:36Z",
-      "updatedAt": "2023-08-20T13:23:39Z",
+      "updatedAt": "2024-01-31T15:11:54Z",
       "closedAt": null,
       "comments": [
         {
@@ -3116,7 +3116,7 @@
       ],
       "body": "499a8f88b70ca00bfa5ef588023c68c1d0277bff removed Appendix B but unlinked references to it are still within the document next to almost every `x-www-form-urlencoded` mention.\r\n\r\n---\r\n\r\nThroughout the years this Appendix was THE resource used over and over to explain why and how the OAuth use of the Basic authorization scheme encodes the username and password tokens.\r\n\r\nIf this Appendix is removed I would propose to add examples of client secret basic with username and password tokens where the client_id and client_secret encoding changes the octets that go into the basic authorization scheme base64 encoding. This is an often overlooked implementation detail that both client and server implementers get wrong and end up inoperable, further driving users to use client secret post which this document marks as NOT RECOMMENDED.",
       "createdAt": "2022-07-25T09:07:39Z",
-      "updatedAt": "2024-01-07T01:24:05Z",
+      "updatedAt": "2024-01-31T15:12:00Z",
       "closedAt": null,
       "comments": [
         {
@@ -3603,7 +3603,7 @@
       "labels": [],
       "body": "",
       "createdAt": "2023-07-14T16:18:15Z",
-      "updatedAt": "2023-07-27T15:31:18Z",
+      "updatedAt": "2024-01-31T15:11:27Z",
       "closedAt": null,
       "comments": []
     },
@@ -3621,7 +3621,7 @@
       "labels": [],
       "body": "If the app can claim and own a URI on a platform, it MUST use that mechanism ",
       "createdAt": "2023-07-14T16:48:41Z",
-      "updatedAt": "2023-07-27T15:31:11Z",
+      "updatedAt": "2024-01-31T15:11:22Z",
       "closedAt": null,
       "comments": []
     },
