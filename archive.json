@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-02-06T00:44:47.500567+00:00",
+  "timestamp": "2024-02-08T00:44:41.103209+00:00",
   "repo": "oauth-wg/oauth-v2-1",
   "labels": [
     {
@@ -1492,7 +1492,7 @@
         },
         {
           "author": "panva",
-          "authorAssociation": "NONE",
+          "authorAssociation": "MEMBER",
           "body": "It is not clear which (if any) 2.1 behaviour makes this change possible. AS implementers that want to support both 2.0, or 2.0 + BCP and 2.1 behaviours need to know exactly when its okay to drop the requirement to provide the parameter.\r\n\r\n> OAuth 2.0 only requires the redirect_uri in the token request if it was provided in the authorization request.\r\n\r\nI believe there to be only a handful of servers that support this optional behaviour.",
           "createdAt": "2022-11-08T17:07:20Z",
           "updatedAt": "2022-11-08T17:07:20Z"
@@ -1513,7 +1513,7 @@
         },
         {
           "author": "panva",
-          "authorAssociation": "NONE",
+          "authorAssociation": "MEMBER",
           "body": "Cheers @tlodderstedt. @aaronpk, I believe what Torsten noted above should make it to #97.",
           "createdAt": "2022-11-09T09:45:05Z",
           "updatedAt": "2022-11-09T09:45:05Z"
@@ -3108,7 +3108,7 @@
       "url": "https://github.com/oauth-wg/oauth-v2-1/issues/128",
       "state": "OPEN",
       "author": "panva",
-      "authorAssociation": "NONE",
+      "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [
         "help wanted",
@@ -3128,7 +3128,7 @@
         },
         {
           "author": "panva",
-          "authorAssociation": "NONE",
+          "authorAssociation": "MEMBER",
           "body": "Yes.\r\n\r\n```\r\nThe client identifier is encoded using the\r\n\"application/x-www-form-urlencoded\" encoding algorithm per\r\nAppendix B, and the encoded value is used as the username; the client\r\npassword is encoded using the same algorithm and used as the\r\npassword.\r\n```\r\n\r\nThe client_id and client_secret are encoded before being passed to HTTP Basic as the username and password tokens.",
           "createdAt": "2022-11-08T16:27:47Z",
           "updatedAt": "2022-11-08T16:27:47Z"
@@ -3156,7 +3156,7 @@
         },
         {
           "author": "panva",
-          "authorAssociation": "NONE",
+          "authorAssociation": "MEMBER",
           "body": "The correct js code that matches original appendix b behaviour to encode e.g. the client_id before passing it as username to basic auth is:\r\n\r\n\r\n    function formUrlEncode(token) {\r\n      return encodeURIComponent(token).replace(/(?:[-_.!~*'()]|%20)/g, (substring) => {\r\n        switch (substring) {\r\n          case '-':\r\n          case '_':\r\n          case '.':\r\n          case '!':\r\n          case '~':\r\n          case '*':\r\n          case \"'\":\r\n          case '(':\r\n          case ')':\r\n            return `%${substring.charCodeAt(0).toString(16).toUpperCase()}`\r\n          case '%20':\r\n            return '+'\r\n          default:\r\n            throw new Error()\r\n        }\r\n      })\r\n    }",
           "createdAt": "2022-11-09T21:26:08Z",
           "updatedAt": "2024-01-06T12:28:46Z"
@@ -3170,7 +3170,7 @@
         },
         {
           "author": "panva",
-          "authorAssociation": "NONE",
+          "authorAssociation": "MEMBER",
           "body": "This continues to be a problematic point in the implementations. Both client and server implementations sometimes just rely on [Basic Authentication Scheme](https://datatracker.ietf.org/doc/html/rfc2617#section-2) plugins completely, or partially disregarding the requirement to encode the username/password tokens using application/x-www-form-urlencoded. This makes interop for client implementations particularly difficult.\r\n\r\nI've encountered clients that\r\n\r\n- don't do any encoding\r\n- encode every non-alphanumeric character except `- _ . ! ~ * ' ( )` and incorrectly uses `%20` instead of `+` for the U+0020 (SPACE) character\r\n- encode every non-alphanumeric character except `- _ . ! ~ * ' ( )`\r\n- do everything correctly\r\n\r\nI've encountered servers that\r\n\r\n- do not use any non-alphanumeric characters in their client_id and client_secret (deliberately limiting the syntax of these) as to avoid this mess altogether\r\n- use non-alphanumeric characters and gracefully handle the client mistakes mentioned above with the exception of no encoding used\r\n- use non-alphanumeric characters but fail to authenticate clients that encode properly as per the definition in OAuth\r\n\r\nThe biggest offender here is Google who uses `-` and `.` in their client_id values but fails to authenticate clients that properly encode those characters. Because of this, it's been the case for years that the most interoperable client implementation was to encode every non-alphanumeric character except `- _ . ! ~ * ' ( )`, which doesn't follow the definition.\r\n\r\ncc @jogu This issue is even present in the Google Federated Identity listing on https://openid.net/certification where the test suite back then did not properly encode. I hope that if the suite ran against google's implementation today the certification would fail.\r\n\r\nWhat a mess.\r\n\r\n- I think we should be giving more examples in the document. The current example of client_secret_basic avoids non-alphanumeric characters.\r\n- I think we should discuss restricting the client_id and client_secret syntax to alphanumerics only to avoid this mess completely.\r\n\r\nI'd like this issue to be discussed in future OAuth WG meetings.",
           "createdAt": "2024-01-06T10:36:51Z",
           "updatedAt": "2024-01-06T11:07:17Z"
