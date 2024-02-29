@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-02-27T00:44:31.973883+00:00",
+  "timestamp": "2024-02-29T00:44:46.151540+00:00",
   "repo": "oauth-wg/oauth-v2-1",
   "labels": [
     {
@@ -3915,6 +3915,70 @@
       "body": "Section 3.2.2 Tokens states that\r\n\r\n> The client makes a request to the token endpoint by sending the\r\n> following parameters using the application/x-www-form-urlencoded\r\n> format per Appendix B with a character encoding of UTF-8 in the HTTP\r\n> request content:\r\n\r\nHowever, the following example does not include UTF-8 as character encoding\r\n\r\n> POST /token HTTP/1.1\r\n> Host: server.example.com\r\n> Authorization: Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW\r\n> Content-Type: application/x-www-form-urlencoded\r\n\r\nit should look like as\r\n\r\n> POST /token HTTP/1.1\r\n> Host: server.example.com\r\n> Authorization: Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW\r\n> Content-Type: application/x-www-form-urlencoded; charset=UTF-8; \r\n\r\nthe same applies for all other similar examples in the spec.\r\n\r\nHow is this important? In some (rare) cases, it can lead to interoperability issues as app servers & frameworks that run an AS do not necessarily use \"UTF-8\" as a default encoding character, as an example, Java Servlets use \"ISO-8859-1\". So, it is better for a client to always specify the character explicitly. \r\n",
       "createdAt": "2024-01-22T18:32:47Z",
       "updatedAt": "2024-01-24T00:30:24Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 168,
+      "id": "I_kwDODkfq5s6Aoxnc",
+      "title": "\"Suprising\" printing service example in introduction",
+      "url": "https://github.com/oauth-wg/oauth-v2-1/issues/168",
+      "state": "OPEN",
+      "author": "SECtim",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "The printing service example in the introduction (just after the list of disadvantages of the client-server authentication model) comes somewhat as a surprise.\r\n\r\nhttps://github.com/oauth-wg/oauth-v2-1/blob/f79f58841f717b0e6050da663c4a858bc100fda1/draft-ietf-oauth-v2-1.md?plain=1#L236-L242\r\n\r\nI guess this could easily be fixed by adding a \"For example, \".",
+      "createdAt": "2024-02-28T05:50:35Z",
+      "updatedAt": "2024-02-28T05:50:53Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 169,
+      "id": "I_kwDODkfq5s6AqD-N",
+      "title": "Terminology: \"relying party\" vs. \"client\"",
+      "url": "https://github.com/oauth-wg/oauth-v2-1/issues/169",
+      "state": "OPEN",
+      "author": "SECtim",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "In some places, the term \"relying party\" is used instead of \"client\":\r\n\r\nhttps://github.com/oauth-wg/oauth-v2-1/blob/f79f58841f717b0e6050da663c4a858bc100fda1/draft-ietf-oauth-v2-1.md?plain=1#L2820-L2822\r\n\r\nhttps://github.com/oauth-wg/oauth-v2-1/blob/f79f58841f717b0e6050da663c4a858bc100fda1/draft-ietf-oauth-v2-1.md?plain=1#L2578-L2582",
+      "createdAt": "2024-02-28T09:33:25Z",
+      "updatedAt": "2024-02-28T09:33:25Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 170,
+      "id": "I_kwDODkfq5s6AqIab",
+      "title": "Ambigious text around whether `code_challenge` is required",
+      "url": "https://github.com/oauth-wg/oauth-v2-1/issues/170",
+      "state": "OPEN",
+      "author": "SECtim",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "The following text snippets seem like a `code_challenge` is always required in the authorization request (for authZ code flows).\r\n\r\nDescription of the authZ code flow figure:\r\nhttps://github.com/oauth-wg/oauth-v2-1/blob/f79f58841f717b0e6050da663c4a858bc100fda1/draft-ietf-oauth-v2-1.md?plain=1#L1468-L1470\r\n\r\nhttps://github.com/oauth-wg/oauth-v2-1/blob/f79f58841f717b0e6050da663c4a858bc100fda1/draft-ietf-oauth-v2-1.md?plain=1#L1485-L1487\r\n\r\nhttps://github.com/oauth-wg/oauth-v2-1/blob/f79f58841f717b0e6050da663c4a858bc100fda1/draft-ietf-oauth-v2-1.md?plain=1#L1493-L1494\r\n\r\nSection 4.3.1:\r\nhttps://github.com/oauth-wg/oauth-v2-1/blob/f79f58841f717b0e6050da663c4a858bc100fda1/draft-ietf-oauth-v2-1.md?plain=1#L1863-L1865\r\n\r\nWhereas various other places, most prominently Section 7.5.2, state that `code_challenge` is (only) required _unless_ some conditions are met:\r\n\r\nhttps://github.com/oauth-wg/oauth-v2-1/blob/f79f58841f717b0e6050da663c4a858bc100fda1/draft-ietf-oauth-v2-1.md?plain=1#L2743-L2750",
+      "createdAt": "2024-02-28T09:42:36Z",
+      "updatedAt": "2024-02-28T09:42:36Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 171,
+      "id": "I_kwDODkfq5s6AqOxG",
+      "title": "Handling of colliding URI query parameter names",
+      "url": "https://github.com/oauth-wg/oauth-v2-1/issues/171",
+      "state": "OPEN",
+      "author": "SECtim",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "The URIs for the **redirect** and **authorization** endpoints may contain additional query parameters that must be retained when adding more parameters:\r\nhttps://github.com/oauth-wg/oauth-v2-1/blob/f79f58841f717b0e6050da663c4a858bc100fda1/draft-ietf-oauth-v2-1.md?plain=1#L860-L865\r\nhttps://github.com/oauth-wg/oauth-v2-1/blob/f79f58841f717b0e6050da663c4a858bc100fda1/draft-ietf-oauth-v2-1.md?plain=1#L1118-L1121\r\n\r\nFurthermore, query parameters must only appear once (this text appears in the description of the authorization and token endpoints, but is not explicitly mentioned for the redirection endpoint - nevertheless, the cited text already applies to all parameters defined by this spec):\r\nhttps://github.com/oauth-wg/oauth-v2-1/blob/f79f58841f717b0e6050da663c4a858bc100fda1/draft-ietf-oauth-v2-1.md?plain=1#L1129-L1130\r\n\r\nThis becomes a problem in (I admit, somewhat esoteric) cases where the endpoint URIs contain parameters such as `code` in a redirect URI, in that example, the AS would not be allowed to add its `code` parameter in the authorization response. But at the same time, the AS is required to do so:\r\nhttps://github.com/oauth-wg/oauth-v2-1/blob/f79f58841f717b0e6050da663c4a858bc100fda1/draft-ietf-oauth-v2-1.md?plain=1#L1657-L1664\r\n\r\nI guess this is just a case of adding something like \"redirect URI MUST NOT contain the parameters...\".",
+      "createdAt": "2024-02-28T09:54:55Z",
+      "updatedAt": "2024-02-28T09:54:55Z",
       "closedAt": null,
       "comments": []
     }
